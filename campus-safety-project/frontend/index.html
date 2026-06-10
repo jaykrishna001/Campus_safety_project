@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Shield - Report Safely</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background-attachment: fixed;
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+        }
+
+        .logo-brand h1 {
+            font-size: 24px;
+            color: #0f2027;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .admin-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ffdc00, #ffc300);
+            color: #0f2027;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 220, 0, 0.3);
+            font-size: 14px;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 220, 0, 0.4);
+        }
+
+        /* SOS BUTTON - Emergency */
+        .sos-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .sos-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+            font-size: 32px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 71, 87, 0.6);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .sos-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 71, 87, 0.8);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 71, 87, 0.6); }
+            50% { box-shadow: 0 0 50px rgba(255, 71, 87, 1); }
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* INFO SECTION */
+        .info-section {
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .info-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid #ffdc00;
+        }
+
+        .feature-item-icon {
+            font-size: 24px;
+        }
+
+        /* FORM SECTION */
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .form-container h2 {
+            font-size: 24px;
+            color: #0f2027;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .form-container > p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f8f8f8;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #0f2027;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(15, 32, 39, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 10px;
+            background: #f8f8f8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .file-input-label:hover {
+            border-color: #0f2027;
+            background: #f0f0f0;
+        }
+
+        #photo {
+            display: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 117, 140, 0.4);
+        }
+
+        .reset-btn {
+            flex: 1;
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reset-btn:hover {
+            background: #d0d0d0;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #28a745;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .info-section {
+                order: 2;
+            }
+
+            .form-container {
+                order: 1;
+            }
+
+            .sos-container {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .sos-btn {
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo-brand">
+            <img src="logo.jpeg" alt="Campus Shield Logo">
+            <h1>Campus Shield</h1>
+        </div>
+        <button class="admin-btn" onclick="goLogin()">Admin Login</button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <!-- INFO SECTION -->
+        <div class="info-section">
+            <h2>Report Safely</h2>
+            <p>Campus Shield empowers you to report safety concerns confidentially and securely.</p>
+
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feature-item-icon">🔒</span>
+                    <div>
+                        <strong>Confidential</strong>
+                        <p style="margin: 0; font-size: 12px; opacity: 0.8;">Your identity is protected</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-item-icon">⚡</span>
+                    <div>
+                        <strong>Fast Response</strong>
+                        <p style="margin: 0; font-size: 12px; opacity: 0.8;">Quick review by authorities</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-item-icon">📍</span>
+                    <div>
+                        <strong>Location Based</strong>
+                        <p style="margin: 0; font-size: 12px; opacity: 0.8;">Help us pinpoint the issue</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-item-icon">📱</span>
+                    <div>
+                        <strong>Always Available</strong>
+                        <p style="margin: 0; font-size: 12px; opacity: 0.8;">Report anytime, anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORM SECTION -->
+        <div class="form-container">
+            <h2>File a Complaint</h2>
+            <p>Tell us what happened. All information is treated confidentially.</p>
+
+            <div class="success-message" id="successMsg">
+                ✓ Your complaint has been submitted successfully. Thank you for helping keep our campus safe.
+            </div>
+
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="type">Incident Type *</label>
+                        <select id="type" required>
+                            <option value="">Select Type</option>
+                            <option value="harassment">Harassment</option>
+                            <option value="racism">Racism</option>
+                            <option value="bullying">Bullying</option>
+                            <option value="safety">Safety</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="severity">Severity Level *</label>
+                        <select id="severity" required>
+                            <option value="">Select Severity</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical - Emergency</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="desc">Description *</label>
+                        <textarea id="desc" placeholder="Describe what happened in detail..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="loc">Location *</label>
+                        <input id="loc" type="text" placeholder="Where did this happen?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date *</label>
+                        <input id="date" type="date" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="time">Time *</label>
+                        <input id="time" type="time" required>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Evidence (Photo/Document)</label>
+                        <label for="photo" class="file-input-label">
+                            <span>📎 Click to upload photo or document</span>
+                        </label>
+                        <input type="file" id="photo" accept="image/*,.pdf,.doc,.docx">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="submit-btn">Submit Complaint</button>
+                    <button type="reset" class="reset-btn">Clear Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SOS EMERGENCY BUTTON -->
+    <div class="sos-container">
+        <button class="sos-btn" onclick="toggleSOS()" title="Emergency - Press for immediate help">🚨</button>
+    </div>
+
+    <script src="js/app.js"></script>
+
+    <script>
+        function goLogin() {
+            window.location.href = "login.html";
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            submitForm();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body { margin:0; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1f3c88, #4f6fd9, #9fb8ff); color: #fff; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+        .panel { width:90%; max-width:1000px; background: rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.35); border-radius:18px; backdrop-filter: blur(10px); box-shadow: 0 18px 40px rgba(0,0,0,0.3); padding:30px; }
+        .panel h2 { margin:0 0 18px; font-size:2rem; text-align:center; letter-spacing:1px; position:relative; }
+        .panel h2::before { content:'🏅'; position:absolute; left:calc(50% - 1.2rem); top:-1.8rem; font-size:1.6rem; }
+        table { width:100%; border-collapse:collapse; margin-top: 12px; background: rgba(0,0,0,0.2); border-radius: 10px; overflow:hidden; }
+        table th, table td { padding:12px 10px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.2); }
+        .severity-low { color: #0f5132; background: rgba(25, 135, 84,0.2); border-radius: 10px; padding: 2px 8px; font-weight: 600; }
+        .severity-medium { color: #664d03; background: rgba(255, 193, 7,0.2); border-radius: 10px; padding: 2px 8px; font-weight: 600; }
+        .severity-high { color: #b02a37; background: rgba(220, 53, 69,0.2); border-radius: 10px; padding: 2px 8px; font-weight: 600; }
+        .severity-critical { color: #842029; background: rgba(220, 53, 69,0.35); border-radius: 10px; padding: 2px 8px; font-weight: 700; text-transform: uppercase; }
+        table th { background: rgba(255,255,255,0.2); font-weight:700; }
+        table tr:nth-child(even){ background: rgba(255,255,255,0.1); }
+        table tr:hover { background: rgba(255,255,255,0.15); }
+        .badge { display:inline-block; font-size:0.8rem; padding:3px 8px; border-radius:999px; background: rgba(255,255,255,0.2); color:#fff; margin-right:6px; }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h2>Admin Dashboard</h2>
+        <table id="t"></table>
+    </div>
+    <script src="js/admin.js"></script>
+</body>
+</html>
