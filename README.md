@@ -30,6 +30,7 @@ Mark issues as resolved
 Track complaint status
 Monitor campus safety trends
 📂 Project Structure
+
 Campus-Shield/
 │
 ├── backend/
@@ -51,6 +52,7 @@ Campus-Shield/
 │       └── admin.js
 │
 └── README.md
+
 🛠️ Technologies Used
 Frontend
 HTML5
@@ -77,6 +79,7 @@ python app.py
 Server will start at:
 
 http://127.0.0.1:5000
+
 6. Run Frontend
 
 Open:
